@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <style>
+        .active{
+            cursor: none;
+            pointer-events: none;
+
+        }
+        .active a{
+            color: red;
+            text-decoration: none;
+        }
+        .pageBar{
+            width: 40%;
+            display: flex;
+            list-style: none;
+        }
+
+        .pageBar li{
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<h1>这里是主页</h1>
+<table border="1" cellpadding="5" cellspacing="5">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>id</th>
+        <th>name</th>
+        <th>age</th>
+        <th>email</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user,stat:${pages.records}">
+        <td th:text="${stat.count}">count</td>
+        <td th:text="${user.id}">id</td>
+        <td th:text="${user.name}">name</td>
+        <td th:text="${user.age}">age</td>
+        <td th:text="${user.email}">email</td>
+        <td >
+            <a th:href="@{/user/delete/{id}(id=${user.id},page=${pages.current})}">删除</a>
+        </td>
+        <!--  行内写法   -->
+<!--        <td>[[${user.email}]]</td>-->
+    </tr>
+    </tbody>
+</table>
+<div>
+    当前第[[${pages.current}]]页
+    总计[[${pages.pages}]]页
+    共[[${pages.total}]]条记录
+</div>
+<div>
+    <ul class="pageBar">
+        <li><a th:href="@{/userlist(page=${pages.current}-1)}"><--上一页</a></li>
+        <li th:class="${num == pages.current?'active':''}" th:each="num:${#numbers.sequence(1,pages.pages)}">
+            <a th:href="@{/userlist(page=${num})}">[[${num}]]</a>
+        </li>
+        <li><a th:href="@{/userlist(page=${pages.current}+1)}">下一页--></a></li>
+    </ul>
+</div>
+</body>
+</html>

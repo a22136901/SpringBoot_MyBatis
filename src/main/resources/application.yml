@@ -1,0 +1,37 @@
+#mybatis:
+#  mapper-locations: classpath:mybatis/mapper/*.xml
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springboot?serverTimezone=UTC
+    username: root
+    password: mysql
+
+    druid:
+      filters: stat,wall                  #开启sql监控和防火请功能，他们里面还有详细配置参照官方文档,所有filter在DruidFilterConfiguration
+      stat-view-servlet: #配置监控页面
+        enabled: true                      #设置默认开启数据监控
+        login-username: admin              #登陆监控窗口的用户名
+        login-password: 123456             #登录监控窗口的密码
+        reset-enable: false                #取消监控页的重置按钮，不重置监控的数据
+      web-stat-filter: #监控web
+        enabled: true                      #开启过滤器，监控web应用
+        url-pattern: /*                    #过滤的url
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'       #放行的请求资源(这里列出的是默认的)
+      aop-patterns: com.test.admin.*       #监控Spring的Bean
+
+#management:    是所有actuator的监控配置
+
+management:
+  endpoints:
+    enabled-by-default: true    #默认开启所有监控端点（默认已经是true了），这里false，下面各个enabled开启。
+    web:
+      exposure:
+        include: '*'  #以web方式暴露所有端点
+  endpoint:
+    health:
+      show-details: always  #配置单个端点，总是显示详细信息
