@@ -45,7 +45,11 @@ public class UserController {
         Page<User> pages = userService.page(userPage, null);
         model.addAttribute("pages",pages);
         pages.getRecords(); //所有User记录都放到这里了
+
+        //以下两行代码由于git测试，忽略
         pages.getCurrent();
+        pages.getCurrent();
+
 //        model.addAttribute("userlist",list);
         return "index";
     }
