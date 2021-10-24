@@ -50,6 +50,7 @@ public class UserController {
         pages.getCurrent();
         pages.getCurrent();
         System.out.println("冲突合并测试master");
+        System.out.println("测试冲突合并hot-fix");
 
 //        model.addAttribute("userlist",list);
         return "index";
