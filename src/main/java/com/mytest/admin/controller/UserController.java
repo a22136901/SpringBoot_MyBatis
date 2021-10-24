@@ -49,6 +49,7 @@ public class UserController {
         //以下两行代码由于git测试，忽略
         pages.getCurrent();
         pages.getCurrent();
+        System.out.println("测试冲突合并hot-fix");
 
 //        model.addAttribute("userlist",list);
         return "index";
