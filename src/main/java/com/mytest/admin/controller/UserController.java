@@ -46,9 +46,10 @@ public class UserController {
         model.addAttribute("pages",pages);
         pages.getRecords(); //所有User记录都放到这里了
 
-        //以下两行代码由于git测试，忽略
+        //以下几行代码由于git测试，忽略
         pages.getCurrent();
         pages.getCurrent();
+        System.out.println("冲突合并测试master");
 
 //        model.addAttribute("userlist",list);
         return "index";
